@@ -10,3 +10,4 @@
 [Script.zip](https://github.com/user-attachments/files/19577779/Script.zip)
 
 <h1>Aula 04.B.ac Expressões JOIN e Views</h1>
+https://drive.google.com/file/d/1aNKBU1ROZDbFDnT82yTZN4nTxHwu7whZ/view?usp=drive_link
