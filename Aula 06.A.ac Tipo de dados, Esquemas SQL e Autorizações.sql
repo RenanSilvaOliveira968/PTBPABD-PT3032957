@@ -1,0 +1,48 @@
+--CRIANDO UMA ROLE COM OS ACESSOS
+CREATE ROLE EXCEPT_CLASSROOM;
+GRANT SELECT, INSERT ON dbo.advisor TO EXCEPT_CLASSROOM;
+GRANT SELECT, INSERT ON dbo.course TO EXCEPT_CLASSROOM;
+GRANT SELECT, INSERT ON dbo.department TO EXCEPT_CLASSROOM;
+GRANT SELECT, INSERT ON dbo.instructor TO EXCEPT_CLASSROOM;
+GRANT SELECT, INSERT ON dbo.prereq TO EXCEPT_CLASSROOM;
+GRANT SELECT, INSERT ON dbo.section TO EXCEPT_CLASSROOM;
+GRANT SELECT, INSERT ON dbo.student TO EXCEPT_CLASSROOM;
+GRANT SELECT, INSERT ON dbo.takes TO EXCEPT_CLASSROOM;
+GRANT SELECT, INSERT ON dbo.teaches TO EXCEPT_CLASSROOM;
+GRANT SELECT, INSERT ON dbo.time_slot TO EXCEPT_CLASSROOM;
+
+--Garantindo distribuição de acesso ao usuário_A
+GRANT ALTER ON ROLE::EXCEPT_CLASSROOM TO User_A;
+
+--CRIANDO OS USUÁRIOS
+CREATE USER User_A WITH PASSWORD = 'Testttttt!0';
+CREATE USER User_B WITH PASSWORD = 'Testttttt!1';
+CREATE USER User_C WITH PASSWORD = 'Testttttt!2';
+CREATE USER User_D WITH PASSWORD = 'Testttttt!3';
+CREATE USER User_E WITH PASSWORD = 'Testttttt!4';
+
+--DANDO PERMISSÕES
+ALTER ROLE EXCEPT_CLASSROOM ADD MEMBER User_A;
+ALTER ROLE EXCEPT_CLASSROOM ADD MEMBER User_B;
+ALTER ROLE EXCEPT_CLASSROOM ADD MEMBER User_C;
+ALTER ROLE EXCEPT_CLASSROOM ADD MEMBER User_D;
+ALTER ROLE EXCEPT_CLASSROOM ADD MEMBER User_E;
+
+SELECT
+princ.name,
+princ.type_desc,
+perm.permission_name,
+perm.state_desc,
+perm.class_desc,
+object_name(perm.major_id)
+FROM sys.database_principals princ
+left join
+	sys.database_permissions perm
+
+	on perm.grantee_principal_id = princ.principal_id
+WHERE princ.type_desc ='SQL_USER'
+AND princ.name = 'User_A'
+ORDER BY princ.name;
+
+
+
