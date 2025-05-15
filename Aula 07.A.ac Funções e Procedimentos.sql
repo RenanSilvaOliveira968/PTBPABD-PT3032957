@@ -1,3 +1,5 @@
+--Questão 1
+
 CREATE PROCEDURE student_grade_points @Grade VARCHAR(5)
 AS BEGIN
 SELECT s.name,s.dept_name, c.title, c.dept_name,t.semester, t.year,t.grade
@@ -13,6 +15,7 @@ end;
 
 EXEC student_grade_points 'A+';
 
+--Questão 2
 
 CREATE FUNCTION return_instructor_location (@nomeProfessor VARCHAR(30))
 RETURNS TABLE
